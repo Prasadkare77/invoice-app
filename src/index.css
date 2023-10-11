@@ -7,10 +7,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #f1f1f1;
 }
+.main-container{
+  width: 65%; 
+  align-self: center;
+  align-content: center;
+  margin:auto;
+}
 li{
   list-style-type: none;
 }
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

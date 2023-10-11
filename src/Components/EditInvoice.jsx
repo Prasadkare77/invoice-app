@@ -1,16 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useNavigate } from 'react-router-dom';
-
-// Import useDispatch for calling the action in the reducer
-import { useDispatch } from 'react-redux';
-// Import reducer action from myDetails Slice
-import { addMyDetails } from '../StoreAndSlices/myDetailsSlice'
-import { addClientDetails } from '../StoreAndSlices/clientDetailsSlice';
-import { addInvoiceDate } from '../StoreAndSlices/invoiceDateSlice';
-import { addNotesDetails } from '../StoreAndSlices/notesSlice';
-import { addItems } from '../StoreAndSlices/itemSlice';
-
+import { useNavigate, useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
@@ -26,11 +17,19 @@ import Notes from './Notes';
 import Footer from './Footer';
 import Button from 'react-bootstrap/Button'
 import TableForm from './TableForm';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateMyDetails } from '../StoreAndSlices/myDetailsSlice'
+import { updateInvoiceDate } from '../StoreAndSlices/invoiceDateSlice'
 
-
-const Invoice = () => {
+const EditInvoice = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
+
+    const {ID} = useParams()
+    console.log(ID);
+
+    // const myDetails = useSelector(state => state.myDetails.myDetails)
+    const invoiceDates = useSelector(state => state.invoiceDate.invoiceDates)
 
     const [showInvoice, setShowInvoice] = useState(false)
     const [name, setName] = useState()
@@ -55,34 +54,40 @@ const Invoice = () => {
     const [price, setPrice] = useState()
     const [amount, setAmount] = useState()
 
-    const handlePrint = () => {
+    useEffect(()=>{
+        const invoiceDate = invoiceDates.find((invoiceDate) => invoiceDate.ID === parseInt(ID))
+        console.log(invoiceDate)
+        if(invoiceDate){
+          setInvoiceNumber(invoiceDate.invoiceNumber)
+          setInvoiceDate(invoiceDate.invoiceDate)
+          setDueDate(invoiceDate.dueDate)
+        }
+      },[ID,invoiceDates])
+
+    //   useEffect(()=>{
+    //     const myDetail = myDetails.find((myDetail) => myDetail.ID === parseInt(ID))
+    //     console.log(myDetail)
+    //     if(myDetail){
+    //       setName(myDetail.name)
+    //       setAddress(myDetail.address)
+    //       setEmail(myDetail.email)
+    //       setPhone(myDetail.phone)
+    //       setBankName(myDetail.bankName)
+    //       setBankAccount(myDetail.bankAccount)
+    //       setWebsite(myDetail.website)
+    //     }
+    //   },[ID,myDetails])
+
+      const handleUpdate = (e) => {
+        e.preventDefault();
+        const updatedInvoiceDate = {ID:parseInt(ID),invoiceNumber,invoiceDate,dueDate}
+        dispatch(updateInvoiceDate({ID:parseInt(ID),updatedInvoiceDate}))
+        navigate('/')
+      }
+      const handlePrint = () => {
         window.print()
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const myDetails = {ID:Date.now,name,address,email,phone,bankName,bankAccount,website}
-        console.log(myDetails)
-        dispatch(addMyDetails(myDetails))   
-        
-        const clientDetails = {ID:Date.now, clientName, clientAddress}
-        console.log(clientDetails)
-        dispatch(addClientDetails(clientDetails))
-
-        const invoiceDates = {ID:Date.now, invoiceNumber, invoiceDate, dueDate}
-        console.log(invoiceDates)
-        dispatch(addInvoiceDate(invoiceDates))
-
-        const notesDetails = {ID:Date.now, notes}
-        console.log(notesDetails)
-        dispatch(addNotesDetails(notesDetails))
-
-        const item = {ID:Date.now, description, quantity, price, amount}
-        console.log(item);
-        dispatch(addItems(item))
-        navigate('/')
-    }
-    
   return (
     <>
         <main className='main-container mb-5 mt-2 p-5 bg-white rounded shadow'>
@@ -101,7 +106,7 @@ const Invoice = () => {
                 <>
                    <div className=''>
                         <Container fluid="lg" className='justify-content-md-center'>
-                            <Form onSubmit={handleSubmit}>
+                            <Form onSubmit={handleUpdate}>
                                 <div className=''>
                                         <Row className='d-inline-block mb-2 me-2'>
                                             <Col className='d-block fw-bold'><Form.Label>Your Full Name</Form.Label></Col>
@@ -172,7 +177,7 @@ const Invoice = () => {
                                     </div>
 
                                     <Button onClick={()=> setShowInvoice(true)} className='shadow py-2 px-8 m-2' variant="outline-primary">Preview Invoice</Button>
-                                    <Button type='submit' onSubmit={()=>navigate('/')} className='shadow py-2 px-8 m-2' variant="outline-primary">Add Invoice</Button>
+                                    <Button type='submit' onSubmit={()=>navigate('/')} className='shadow py-2 px-8 m-2' variant="outline-primary">Update Invoice</Button>
                             </Form>
                         </Container>
                    </div>
@@ -183,4 +188,4 @@ const Invoice = () => {
   )
 }
 
-export default Invoice
+export default EditInvoice

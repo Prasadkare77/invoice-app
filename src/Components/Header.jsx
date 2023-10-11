@@ -5,9 +5,9 @@ const Header = ({handlePrint}) => {
     
   return (
     <>
-         <header className='d-flex mb-5 d-flex-row justify-content-between'>
+         <header className='d-flex mb-3 d-flex-row justify-content-between'>
             <div>
-                <h1 className='fw-bold text-uppercase tracking-wide text-4xl mb-3'>Invoice</h1>
+                <h1 className='fw-bold text-uppercase tracking-wide text-4xl mb-1'>Invoice</h1>
             </div>
             <div className='container text-end justify-content-center'>
                 <Button onClick={handlePrint} className='btn btn-print ms-1 me-1 shadow' variant='outline-secondary'>Print</Button>

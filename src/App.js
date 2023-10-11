@@ -1,12 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 import Invoice from './Components/Invoice';
+import InvoiceList from './Components/InvoiceList';
+import EditInvoice from './Components/EditInvoice';
 
 function App() {
   return (
     <>
-      <Invoice/>
+      <Router>
+          <Routes>
+            <Route exact path='/' element={<InvoiceList/>}></Route>
+            <Route exact path='/invoice' element={<Invoice/>}></Route>
+            <Route exact path='/editInvoice/:ID' element={<EditInvoice/>}></Route>
+          </Routes>
+        </Router>
     </>
   );
 }

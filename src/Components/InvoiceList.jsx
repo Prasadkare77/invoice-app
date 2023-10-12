@@ -12,7 +12,6 @@ const InvoiceList = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate();
 
-  const [showInvoice, setShowInvoice] = useState(false)
 
   const invoices = useSelector((state) => state.invoice.invoices);
 

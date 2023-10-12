@@ -11,8 +11,6 @@ const Header = ({handlePrint}) => {
             </div>
             <div className='container text-end justify-content-center'>
                 <Button onClick={handlePrint} className='btn btn-print ms-1 me-1 shadow' variant='outline-secondary'>Print</Button>
-                <Button className='btn btn-print ms-1 me-1 shadow' variant="primary">Download</Button>
-                <Button className='btn btn-print ms-1 me-1 shadow' variant="success">Send</Button>
             </div>
         </header>
     </>

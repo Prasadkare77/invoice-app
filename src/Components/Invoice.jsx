@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 // Import useDispatch for calling the action in the reducer
 import { useDispatch } from 'react-redux';
 // Import reducer action from myDetails Slice
-import { addMyDetails } from '../StoreAndSlices/myDetailsSlice'
+import { addInvoice } from '../StoreAndSlices/invoiceDetailsSlice'
 import { addClientDetails } from '../StoreAndSlices/clientDetailsSlice';
 import { addInvoiceDate } from '../StoreAndSlices/invoiceDateSlice';
 import { addNotesDetails } from '../StoreAndSlices/notesSlice';
@@ -61,25 +61,10 @@ const Invoice = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const myDetails = {ID:Date.now,name,address,email,phone,bankName,bankAccount,website}
-        console.log(myDetails)
-        dispatch(addMyDetails(myDetails))   
+        const invoice = {ID:Date.now,name,address,email,phone,bankName,bankAccount,website,clientName,clientAddress,invoiceNumber,invoiceDate,dueDate,notes,description,quantity,price,amount}
+        console.log(invoice)
+        dispatch(addInvoice(invoice))   
         
-        const clientDetails = {ID:Date.now, clientName, clientAddress}
-        console.log(clientDetails)
-        dispatch(addClientDetails(clientDetails))
-
-        const invoiceDates = {ID:Date.now, invoiceNumber, invoiceDate, dueDate}
-        console.log(invoiceDates)
-        dispatch(addInvoiceDate(invoiceDates))
-
-        const notesDetails = {ID:Date.now, notes}
-        console.log(notesDetails)
-        dispatch(addNotesDetails(notesDetails))
-
-        const item = {ID:Date.now, description, quantity, price, amount}
-        console.log(item);
-        dispatch(addItems(item))
         navigate('/')
     }
     
@@ -88,7 +73,7 @@ const Invoice = () => {
         <main className='main-container mb-5 mt-2 p-5 bg-white rounded shadow'>
             {showInvoice ? <div>
                 <Header handlePrint={handlePrint} />
-                <MainDetails name={name} address={address} />
+                <MainDetails name={name} address={address}/>
                 <ClientDetials clientName={clientName} clientAddress={clientAddress}  />
                 <Dates invoiceNumber={invoiceNumber} invoiceDate={invoiceDate} dueDate={dueDate} />
                 <Tables description={description} quantity={quantity} amount={amount} price={price} />
@@ -173,6 +158,7 @@ const Invoice = () => {
 
                                     <Button onClick={()=> setShowInvoice(true)} className='shadow py-2 px-8 m-2' variant="outline-primary">Preview Invoice</Button>
                                     <Button type='submit' onSubmit={()=>navigate('/')} className='shadow py-2 px-8 m-2' variant="outline-primary">Add Invoice</Button>
+                                    <Button onClick={() => navigate("/")} className="shadow py-2 px-8 m-2" variant="outline-primary">Cancel</Button>
                             </Form>
                         </Container>
                    </div>

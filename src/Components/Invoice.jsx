@@ -6,11 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 // Import reducer action from myDetails Slice
 import { addInvoice } from '../StoreAndSlices/invoiceDetailsSlice'
-import { addClientDetails } from '../StoreAndSlices/clientDetailsSlice';
-import { addInvoiceDate } from '../StoreAndSlices/invoiceDateSlice';
-import { addNotesDetails } from '../StoreAndSlices/notesSlice';
-import { addItems } from '../StoreAndSlices/itemSlice';
-
 
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';

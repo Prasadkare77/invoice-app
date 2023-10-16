@@ -11,6 +11,7 @@ import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button'
 
 import Header from './Header';
 import MainDetails from './MainDetails';
@@ -19,7 +20,6 @@ import Dates from './Dates';
 import Tables from './Tables';
 import Notes from './Notes';
 import Footer from './Footer';
-import Button from 'react-bootstrap/Button'
 import TableForm from './TableForm';
 
 

@@ -1,4 +1,5 @@
 import React from "react";
+
 import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
 import Col from "react-bootstrap/esm/Col";
@@ -11,7 +12,6 @@ import { deleteInvoice } from "../StoreAndSlices/invoiceDetailsSlice";
 const InvoiceList = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate();
-
 
   const invoices = useSelector((state) => state.invoice.invoices);
 
